@@ -1,19 +1,28 @@
 import Image from 'next/image'
 import type { Node } from './node'
-import { transformData } from './transformData'
+import { transformData } from './getNotionPages'
+import { Flow } from './flow'
 
 export default async function App() {
   const pages = await transformData()
-  return <>
-    <h1>app page</h1>
-    <ul className="flex gap-7">
-      {pages.map(page =>
-        <li key={page.id}>
-          <Card {...page} />
-        </li>)
-      }
-    </ul>
-  </>
+
+  return (
+    <>
+      <h1>app page</h1>
+      <ul className="flex gap-7">
+        {
+          pages.map(page =>
+            <li key={page.id}>
+              <Card {...page} />
+            </li>,
+          )
+        }
+      </ul>
+      <div className='h-96'>
+        <Flow />
+      </div>
+    </>
+  )
 }
 
 type CardProps = Node
@@ -26,3 +35,4 @@ function Card({ title, icon }: CardProps) {
     </div>
   </div>
 }
+

@@ -1,4 +1,5 @@
 import { Client } from '@notionhq/client'
+import type { Node } from './node'
 
 const databaseId = process.env.NOTION_DATABASE_ID!
 const notionKey = process.env.NOTION_KEY!
@@ -11,6 +12,16 @@ export async function getNotionPages() {
   })
 
   return response.results as NotionQueryResponse[]
+}
+
+export async function transformData(): Promise<Node[]> {
+  const pages = await getNotionPages()
+
+  return pages.map(page => ({
+    id: page.id,
+    title: page.properties.Name.title[0].text.content,
+    icon: page.icon.external.url,
+  }))
 }
 
 export interface Title {
