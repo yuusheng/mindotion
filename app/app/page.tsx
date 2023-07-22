@@ -10,13 +10,11 @@ export default async function App() {
     <>
       <h1>app page</h1>
       <ul className="flex gap-7">
-        {
-          pages.map(page =>
-            <li key={page.id}>
-              <Card {...page} />
-            </li>,
-          )
-        }
+        {pages.map(page => (
+          <li key={page.id}>
+            <Card {...page} />
+          </li>
+        ))}
       </ul>
       <div className='h-96'>
         <Flow />
