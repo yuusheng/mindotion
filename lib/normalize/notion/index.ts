@@ -1,5 +1,5 @@
 import { getNotionBlocks, getNotionDatabases, getNotionPage } from './apis'
-import type { MindotionNode, NotionBlockResponse, NotionQueryResponse } from '@/lib/types'
+import type { MindotionNode, NotionBlockResponse, NotionQueryResponse } from '~/lib/types'
 
 /**
  * Transform Notion data to Mindotion data

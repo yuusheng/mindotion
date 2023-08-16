@@ -1,5 +1,5 @@
 import { Client } from '@notionhq/client'
-import type { NotionBlockResponse, NotionQueryResponse } from '@/lib/types'
+import type { NotionBlockResponse, NotionQueryResponse } from '~/lib/types'
 
 const databaseId = process.env.NOTION_DATABASE_ID!
 const notionKey = process.env.NOTION_KEY!

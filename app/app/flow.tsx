@@ -3,8 +3,8 @@
 import { useCallback, useState } from 'react'
 import type { Connection, Edge, EdgeChange, Node as FlowNode, NodeChange } from 'reactflow'
 import ReactFlow, { Controls, addEdge, applyEdgeChanges, applyNodeChanges } from 'reactflow'
-import type { MindotionNode } from '@/lib/types'
-import NotionNode from '@/components/NotionNode'
+import type { MindotionNode } from '~/lib/types'
+import NotionNode from '~/components/NotionNode'
 
 const nodeTypes = { notionNode: NotionNode }
 

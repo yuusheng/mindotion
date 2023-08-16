@@ -1,7 +1,7 @@
 import { Handle, Position } from 'reactflow'
 import Image from 'next/image'
 import { memo } from 'react'
-import type { MindotionNode } from '@/lib/types'
+import type { MindotionNode } from '~/lib/types'
 
 function NotionNode({ data }: any) {
   const { title, icon, children } = data as MindotionNode
