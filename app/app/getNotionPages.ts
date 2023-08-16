@@ -1,6 +1,5 @@
 import { Client } from '@notionhq/client'
-import type { Node } from './node'
-import type { NotionBlockResponse, NotionQueryResponse } from '@/lib/notionTypes'
+import type { MindotionNode, NotionBlockResponse, NotionQueryResponse } from '@/lib/types'
 
 const databaseId = process.env.NOTION_DATABASE_ID!
 const notionKey = process.env.NOTION_KEY!
@@ -45,9 +44,22 @@ export async function getNotionPage(page_id: string) {
  * @param block Notion block
  */
 export async function getNodeChildrenFromBlock(blocks: NotionBlockResponse[]) {
-  const children: Node[] = []
+  const children: MindotionNode[] = []
 
   async function dfs(_block: NotionBlockResponse) {
+    if (_block.type === 'child_page') {
+      const page = await getNotionPage(_block.id)
+      console.log(page)
+      const icon = getIcon(page)
+
+      children.push({
+        id: page.id,
+        title: page.properties.title.title[0].plain_text,
+        icon,
+      })
+      return
+    }
+
     if (_block.has_children) {
       const _children = await getNotionBlocks(_block.id)
       for (const _child of _children) {
@@ -64,15 +76,6 @@ export async function getNodeChildrenFromBlock(blocks: NotionBlockResponse[]) {
           await dfs(_child)
         }
       }
-    } else if (_block.type === 'child_page') {
-      const page = await getNotionPage(_block.id)
-      const icon = getIcon(page)
-
-      children.push({
-        id: page.id,
-        title: page.properties.Name.title[0].text.content,
-        icon,
-      })
     }
   }
 
@@ -81,7 +84,7 @@ export async function getNodeChildrenFromBlock(blocks: NotionBlockResponse[]) {
   return children
 }
 
-export async function transformData(): Promise<Node[]> {
+export async function transformData(): Promise<MindotionNode[]> {
   const pages = await getNotionDatabases()
 
   return Promise.all(
@@ -103,6 +106,9 @@ export async function transformData(): Promise<Node[]> {
 
 function getIcon(page: NotionQueryResponse) {
   let icon: string
+
+  if (!page.icon)
+    return null
 
   if (page.icon.type === 'emoji')
     icon = page.icon.emoji
