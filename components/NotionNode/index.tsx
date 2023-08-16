@@ -11,7 +11,7 @@ export interface NotionNodeProps {
 }
 
 function NotionNode({ data }: any) {
-  const { title, icon = '' } = data as NotionNodeProps
+  const { title, icon = '', children } = data as NotionNodeProps
 
   return (
     <>
@@ -22,6 +22,11 @@ function NotionNode({ data }: any) {
         <div className='h-4/5 w-full border-b'>
           {/* {cover && cover.startsWith('http') ? <Image src={cover} alt={title} /> : cover} */}
 
+          {
+            children && children.map((child, i) => (
+              <div key={i}>{child.title}</div>
+            ))
+          }
         </div>
         <div className='px-3 flex-1 flex items-center gap-2'>
           <span className='w-[18px] h-[18px]'>

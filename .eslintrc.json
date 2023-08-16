@@ -1,6 +1,10 @@
 {
   "extends": [
-    "@yuusheng",
-    "next"
-  ]
+    "next",
+    "@yuusheng"
+  ],
+  "rules": {
+    "brace-style": "off",
+    "@typescript-eslint/brace-style": "off"
+  }
 }
