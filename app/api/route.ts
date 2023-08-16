@@ -14,8 +14,12 @@ export async function GET() {
   const children = await notion.blocks.children.list({
     block_id: '68b5646c-7280-4064-85dc-7679325c75bf',
   })
-  const block = await notion.pages.retrieve({
+  const blocks = await notion.pages.retrieve({
     page_id: '4b4c5b0c-3241-44f4-847b-49af900b854e',
+  })
+
+  const block = await notion.blocks.retrieve({
+    block_id: '4b4c5b0c-3241-44f4-847b-49af900b854e',
   })
 
   return NextResponse.json(block)

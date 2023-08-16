@@ -1,5 +1,5 @@
-import { transformData } from './getNotionPages'
 import Flow from './flow'
+import { transformData } from '@/lib/normalize/notion'
 
 export default async function App() {
   const pages = await transformData()

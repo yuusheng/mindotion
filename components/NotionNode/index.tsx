@@ -1,17 +1,10 @@
 import { Handle, Position } from 'reactflow'
 import Image from 'next/image'
 import { memo } from 'react'
-
-export interface NotionNodeProps {
-  title: string
-  icon?: string
-  cover?: string
-  url: string
-  children?: NotionNodeProps[]
-}
+import type { MindotionNode } from '@/lib/types'
 
 function NotionNode({ data }: any) {
-  const { title, icon = '', children } = data as NotionNodeProps
+  const { title, icon, children } = data as MindotionNode
 
   return (
     <>

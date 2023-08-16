@@ -1,15 +1,14 @@
 'use client'
 
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 import type { Connection, Edge, EdgeChange, Node as FlowNode, NodeChange } from 'reactflow'
 import ReactFlow, { Controls, addEdge, applyEdgeChanges, applyNodeChanges } from 'reactflow'
 import type { MindotionNode } from '@/lib/types'
 import NotionNode from '@/components/NotionNode'
 
-// const initialEdges = [{ id: '1-2', source: '1', target: '2', label: 'to the', type: 'step' }]
+const nodeTypes = { notionNode: NotionNode }
 
 function Flow({ pages }: { pages: MindotionNode[] }) {
-  const nodeTypes = useMemo(() => ({ notionNode: NotionNode }), [])
   const initialNodes = pages.map((page, index) => ({
     id: page.id,
     type: 'notionNode',
