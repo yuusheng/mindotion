@@ -32,18 +32,18 @@ export async function getNotionBlocks(block_id: string) {
 
 export async function getNotionBlock(block_id: string) {
   const notion = getNotionClient()
-  const children = await notion.blocks.retrieve({
+  const block = await notion.blocks.retrieve({
     block_id,
   })
 
-  return children as NotionBlockResponse
+  return block as NotionBlockResponse
 }
 
 export async function getNotionPage(page_id: string) {
   const notion = getNotionClient()
-  const children = await notion.pages.retrieve({
+  const page = await notion.pages.retrieve({
     page_id,
   })
 
-  return children as NotionPageResponse
+  return page as NotionPageResponse
 }
