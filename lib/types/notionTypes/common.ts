@@ -3,9 +3,7 @@ export interface BaseNotionObject {
   id: string
   created_time: string
   last_edited_time: string
-  created_by: created_by
-  last_edited_by: last_edited_by
-  parent: parent
+  parent: ParentAsUnion
   archived: boolean
   url: string
   public_url?: any
@@ -27,40 +25,10 @@ export type Icon = {
   }
 }
 
-export interface created_by {
-  object: string
-  id: string
-}
+type ParentType = 'database_id' | 'block_id'
+type Parent<U extends ParentType & string> = { type: U } & { [P in U]: string }
+export type DistributeToParent<U extends ParentType & string> = U extends string
+  ? Parent<U>
+  : never
 
-export interface last_edited_by {
-  object: string
-  id: string
-}
-
-export interface parent {
-  type: string
-  database_id: string
-}
-
-export interface Date {
-  id: string
-  type: string
-  date?: any // todo
-}
-
-export interface Status {
-  id: string
-  type: string
-  status: {
-    id: string
-    name: string
-    color: string
-  }
-}
-
-export interface Assign {
-  id: string
-  type: string
-  people: any[] // todo
-}
-
+export type ParentAsUnion = DistributeToParent<ParentType>

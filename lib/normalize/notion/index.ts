@@ -1,5 +1,6 @@
 import { getNotionBlocks, getNotionDatabases, getNotionPage } from './apis'
-import type { MindotionNode, NotionBlockResponse, NotionQueryResponse } from '~/lib/types'
+import type { NotionBlockResponse, NotionPageResponse } from '~/lib/types/notionTypes'
+import type { MindotionNode } from '~/lib/types'
 
 /**
  * Transform Notion data to Mindotion data
@@ -17,7 +18,7 @@ export async function transformData(): Promise<MindotionNode[]> {
 
       return {
         id: page.id,
-        title: page.properties.Name?.title[0].text.content,
+        title: getPageTitle(page),
         icon,
         children,
       }
@@ -39,7 +40,7 @@ async function getChildrenFromBlocks(blocks: NotionBlockResponse[]) {
 
       children.push({
         id: page.id,
-        title: page.properties.title.title[0].plain_text,
+        title: getPageTitle(page),
         icon,
       })
       return
@@ -55,7 +56,7 @@ async function getChildrenFromBlocks(blocks: NotionBlockResponse[]) {
   return children
 }
 
-function getIcon(page: NotionQueryResponse) {
+function getIcon(page: NotionPageResponse) {
   switch (page.icon?.type) {
     case 'emoji':
       return page.icon.emoji
@@ -66,4 +67,11 @@ function getIcon(page: NotionQueryResponse) {
     default:
       return null
   }
+}
+
+function getPageTitle(page: NotionPageResponse) {
+  if (page.parent.type === 'database_id')
+    return page.properties.Name!.title[0].plain_text
+
+  return page.properties.title?.title[0].plain_text ?? ''
 }

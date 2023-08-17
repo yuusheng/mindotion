@@ -12,12 +12,21 @@ function NotionNode({ data }: any) {
       <Handle type="source" position={Position.Bottom} />
 
       <div className="h-[226px] w-[346px] flex flex-col rounded border border-zinc-200 bg-white">
-        <div className='h-4/5 w-full border-b'>
+        <div className='h-4/5 w-full p-3 border-b'>
           {/* {cover && cover.startsWith('http') ? <Image src={cover} alt={title} /> : cover} */}
 
           {
-            children && children.map((child, i) => (
-              <div key={i}>{child.title}</div>
+            children && children.map(child => (
+              <div key={child.id} className='flex px-2 py-1 gap-1 hover:bg-zinc-300/50 rounded-md'>
+                <span className='h-[18px] w-[18px] inline-block'>
+                  {
+                    child.icon && child.icon.startsWith('http')
+                      ? <Image src={child.icon} width={18} height={18} className='w-[18px] h-[18px]' alt={child.title}/>
+                      : child.icon
+                  }
+                </span>
+                <span className='text-zinc-500'>{child.title}</span>
+              </div>
             ))
           }
         </div>

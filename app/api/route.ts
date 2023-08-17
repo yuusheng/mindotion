@@ -19,11 +19,15 @@ export async function GET() {
     page_id: '4b4c5b0c-3241-44f4-847b-49af900b854e',
   })
 
-  const block = await notion.blocks.retrieve({
-    block_id: '4b4c5b0c-3241-44f4-847b-49af900b854e',
+  const unjs = await notion.pages.retrieve({
+    page_id: 'cd74ba06-e1de-4bfe-8a2b-bd08e1e17883',
   })
 
-  return NextResponse.json(block)
+  const unjsChild = await notion.pages.retrieve({
+    page_id: '4b4c5b0c-3241-44f4-847b-49af900b854e',
+  })
+
+  return NextResponse.json({ unjs, unjsChild, response })
 }
 
 export interface Title {

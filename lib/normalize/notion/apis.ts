@@ -1,5 +1,5 @@
 import { Client } from '@notionhq/client'
-import type { NotionBlockResponse, NotionQueryResponse } from '~/lib/types'
+import type { NotionBlockResponse, NotionPageResponse } from '~/lib/types/notionTypes'
 
 const databaseId = process.env.NOTION_DATABASE_ID!
 const notionKey = process.env.NOTION_KEY!
@@ -18,7 +18,7 @@ export async function getNotionDatabases() {
     database_id: databaseId,
   })
 
-  return response.results as NotionQueryResponse[]
+  return response.results as NotionPageResponse[]
 }
 
 export async function getNotionBlocks(block_id: string) {
@@ -45,5 +45,5 @@ export async function getNotionPage(page_id: string) {
     page_id,
   })
 
-  return children as NotionQueryResponse
+  return children as NotionPageResponse
 }

@@ -1,3 +1,3 @@
-export * from './notionQueryResponse'
 export * from './common'
-export * from './notionBlockResponse'
+export * from './block'
+export * from './page'
