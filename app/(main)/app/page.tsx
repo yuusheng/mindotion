@@ -1,4 +1,4 @@
-import Flow from './flow'
+import Mindotion from './Mindotion'
 import { transformData } from '~/lib/normalize/notion'
 
 export default async function App() {
@@ -7,7 +7,7 @@ export default async function App() {
   return (
     <>
       <div className='h-full'>
-        <Flow pages={pages}/>
+        <Mindotion pages={pages}/>
       </div>
     </>
   )

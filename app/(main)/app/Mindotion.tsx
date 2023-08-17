@@ -8,7 +8,7 @@ import NotionNode from '~/components/NotionNode'
 
 const nodeTypes = { notionNode: NotionNode }
 
-function Flow({ pages }: { pages: MindotionNode[] }) {
+function Mindotion({ pages }: { pages: MindotionNode[] }) {
   const initialNodes = pages.map((page, index) => ({
     id: page.id,
     type: 'notionNode',
@@ -47,4 +47,4 @@ function Flow({ pages }: { pages: MindotionNode[] }) {
   )
 }
 
-export default Flow
+export default Mindotion
