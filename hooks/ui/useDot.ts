@@ -10,6 +10,7 @@ import {
   setRoundCap,
 } from 'laser-pen'
 import { type RefObject, useEffect } from 'react'
+import { useResizeObserver } from '~/hooks/useResizeObserver'
 
 export function useDot(canvas: RefObject<HTMLCanvasElement>) {
   useResizeObserver(canvas, (entries) => {
@@ -69,22 +70,6 @@ export function useDot(canvas: RefObject<HTMLCanvasElement>) {
     document.addEventListener('mousemove', handleMouseMove)
     return () => {
       document.removeEventListener('mousemove', handleMouseMove)
-    }
-  }, [])
-}
-
-export function useResizeObserver(
-  target: RefObject<HTMLElement>,
-  callback: (entries: ResizeObserverEntry[]) => void,
-) {
-  useEffect(() => {
-    const resizeObserver = new ResizeObserver(callback)
-    if (!target.current)
-      throw new Error(`${target.current} is not a HTMLElement`)
-
-    resizeObserver.observe(target.current!)
-    return () => {
-      resizeObserver.unobserve(target.current!)
     }
   }, [])
 }
