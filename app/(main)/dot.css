@@ -1,0 +1,10 @@
+.dot-container {
+  --dot: #EAEAEA;
+  
+  background-image: radial-gradient(var(--dot) 2px, transparent 2px);
+  background-size: 30px 30px;
+}
+
+.dark {
+  --dot: #656565;
+}

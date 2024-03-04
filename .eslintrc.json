@@ -5,6 +5,7 @@
   ],
   "rules": {
     "brace-style": "off",
-    "@typescript-eslint/brace-style": "off"
+    "@typescript-eslint/brace-style": "off",
+    "react-hooks/exhaustive-deps": "off"
   }
 }
