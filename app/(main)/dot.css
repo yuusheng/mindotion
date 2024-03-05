@@ -1,10 +1,20 @@
 .dot-container {
-  --dot: #EAEAEA;
-  
+  --dot: #CCC;
+
   background-image: radial-gradient(var(--dot) 2px, transparent 2px);
   background-size: 30px 30px;
 }
 
 .dark {
   --dot: #656565;
+}
+
+.dot-mask {
+  --dot-mask: #FFF;
+  background-image: radial-gradient(transparent 2px, var(--dot-mask) 2px);
+  background-size: 30px 30px;
+}
+
+.dark .dot-mask {
+  --dot-mask: #000;
 }

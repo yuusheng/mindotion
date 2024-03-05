@@ -10,7 +10,8 @@ function Dot() {
 
   return (
     <div className="dot-container absolute top-56 left-20 right-20 bottom-20 -z-10">
-      <canvas ref={canvas} className="h-full w-full" />
+      <div className="dot-mask h-full w-full absolute inset-0 z-10"></div>
+      <canvas ref={canvas} className="h-full w-full z-0" />
     </div>
   )
 }

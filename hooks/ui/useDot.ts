@@ -46,7 +46,8 @@ export function useDot(canvas: RefObject<HTMLCanvasElement>) {
     setDelay(800)
     setMinWidth(5)
     setMaxWidth(90)
-    setColor(255, 255, 255)
+    // setColor(255, 255, 255)
+    setColor(0, 0, 0)
     setRoundCap(true)
     setOpacity(1)
 
