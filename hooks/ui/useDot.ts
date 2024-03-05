@@ -9,10 +9,13 @@ import {
   setOpacity,
   setRoundCap,
 } from 'laser-pen'
+import { useTheme } from 'next-themes'
 import { type RefObject, useEffect } from 'react'
 import { useResizeObserver } from '~/hooks/useResizeObserver'
 
 export function useDot(canvas: RefObject<HTMLCanvasElement>) {
+  const { theme } = useTheme()
+
   useResizeObserver(canvas, (entries) => {
     const entry = entries[0]
     const { width, height } = entry.contentRect
@@ -21,20 +24,36 @@ export function useDot(canvas: RefObject<HTMLCanvasElement>) {
   })
 
   useEffect(() => {
+    setDelay(800)
+    setMinWidth(5)
+    setMaxWidth(90)
+    setRoundCap(true)
+    setOpacity(1)
+    setColor(
+      ...new Array(3).fill(
+        theme === 'dark' ? 255 : 0,
+      ) as [number, number, number],
+    )
+  }, [theme])
+
+  useEffect(() => {
     const canvasDom = document.querySelector('canvas')!
-    const canvasPos = canvasDom.getBoundingClientRect()
-    const ctx = canvasDom.getContext('2d')!
+    const canvasCtx = canvasDom.getContext('2d')!
+    const canvasRect = canvasDom.getBoundingClientRect()
+
+    if (!canvasDom || !canvasCtx)
+      return
 
     let mouseTrack: IOriginalPointData[] = []
 
     let drawing = false
     function draw() {
-      ctx.clearRect(0, 0, canvasDom.width, canvasDom.height)
+      canvasCtx.clearRect(0, 0, canvasDom.width, canvasDom.height)
 
       let needDrawInNextFrame = false
       mouseTrack = drainPoints(mouseTrack)
       if (mouseTrack.length >= 3) {
-        drawLaserPen(ctx, mouseTrack)
+        drawLaserPen(canvasCtx, mouseTrack)
         needDrawInNextFrame = true
       }
 
@@ -43,25 +62,18 @@ export function useDot(canvas: RefObject<HTMLCanvasElement>) {
       else
         drawing = false
     }
-    setDelay(800)
-    setMinWidth(5)
-    setMaxWidth(90)
-    // setColor(255, 255, 255)
-    setColor(0, 0, 0)
-    setRoundCap(true)
-    setOpacity(1)
 
-    const startDrawing = () => {
+    function startDrawing() {
       if (!drawing) {
         drawing = true
         draw()
       }
     }
 
-    const handleMouseMove = (event: MouseEvent) => {
+    function handleMouseMove(event: MouseEvent) {
       mouseTrack.push({
-        x: event.clientX - canvasPos.x,
-        y: event.clientY - canvasPos.y,
+        x: event.clientX - canvasRect.x,
+        y: event.clientY - canvasRect.y,
         time: Date.now(),
       })
 

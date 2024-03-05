@@ -6,7 +6,9 @@
 }
 
 .dark {
-  --dot: #656565;
+  .dot-container {
+    --dot: #666;
+  }
 }
 
 .dot-mask {
