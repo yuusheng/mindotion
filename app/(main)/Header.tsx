@@ -1,5 +1,6 @@
 import { Button } from '~/components/ui/Button'
 import { Separator } from '~/components/ui/Separator'
+import { ThemeToggle } from '~/components/ui/ThemeToggle'
 
 function Header() {
   return (
@@ -8,8 +9,8 @@ function Header() {
         <span className='font-bold'>
           Mindotion
         </span>
-
-        <div className='text-zinc-700/50'>
+        <div className='text-zinc-700/50 flex items-center'>
+          <ThemeToggle />
           <Button variant='text'>
             Login
           </Button>
