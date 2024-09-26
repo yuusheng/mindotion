@@ -9,7 +9,7 @@ export default async function Home() {
     <>
       <section className='px-10 flex flex-col lg:px-28 lg:flex-row relative'>
         <div className='h-[calc(100vh-3.25rem)] flex flex-col gap-10 lg:w-2/3'>
-          <h1 className='mt-36 text-6xl font-bold'>Transform your Notion page into mind map.</h1>
+          <h1 className='mt-36 text-6xl font-bold'>Transform your Notion page into mind map!</h1>
           <h2 className='text-xl text-zinc-400'>
             Mind Maps don&apos;t fully express Yourself? Give your mind map more possibilities with&nbsp;&nbsp;
             <strong className={`${caveat.className} text-3xl text-yellow-500`}>Mindotion!</strong>

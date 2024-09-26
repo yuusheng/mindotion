@@ -11,7 +11,8 @@ export function useResizeObserver(
 
     resizeObserver.observe(target.current!)
     return () => {
-      resizeObserver.unobserve(target.current!)
+      if (target.current)
+        resizeObserver.unobserve(target.current)
     }
   }, [])
 }

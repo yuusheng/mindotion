@@ -1,16 +1,13 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { useState } from 'react'
-import { useMount } from 'react-use'
 import { Button } from './Button'
 import { MoonIcon, SunIcon } from '~/assets'
+import { useMounted } from '~/hooks/useMounted'
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-
-  useMount(() => setMounted(true))
+  const { mounted } = useMounted()
 
   if (!mounted)
     return null
